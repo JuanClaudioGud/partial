@@ -1,0 +1,29 @@
+<mat-toolbar [color]="background">
+  <button 
+    mat-icon-button
+    (click)="cancel.emit()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h3 *ngIf="!hideCount" flex>{{ count }} seleccionado(s)</h3>
+  <ng-container *ngIf="count === 1">
+  	<button
+      *ngIf="viewIcon"
+    	mat-icon-button
+    	(click)="view.emit()">
+    	<mat-icon>visibility</mat-icon>
+  	</button>
+  	<button
+      *ngIf="editIcon"
+  	  mat-icon-button
+  	  (click)="edit.emit()">
+  	  <mat-icon>edit</mat-icon>
+  	</button>
+  </ng-container>
+  <button 
+    *ngIf="deleteIcon"
+    mat-icon-button
+    appConfirm
+    (confirm)="delete.emit()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,26 @@
+@import 'abstracts/mixins';
+
+mat-toolbar {
+	justify-content: space-between;
+}
+
+mwl-calendar-day-view::ng-deep .cal-time-events {
+	@include lt-md {
+		height: calc(100vh - 112.8px);
+		overflow-y: auto;	
+	}
+}
+
+mwl-calendar-month-view::ng-deep .cal-days {
+	@include lt-md {
+		height: calc(100vh - 158.8px);
+		overflow-y: auto;
+	}
+}
+
+mwl-calendar-week-view::ng-deep .cal-time-events {
+	@include lt-md {
+		height: calc(100vh - 162.8px);
+		overflow-y: auto;
+	}
+}

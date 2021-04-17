@@ -1,0 +1,1 @@
+export { AppointmentsTableComponent } from './appointments-table.component';

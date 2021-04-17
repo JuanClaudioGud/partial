@@ -1,0 +1,29 @@
+<mat-list>
+	<span mat-subheader>
+		{{ notification.createdAt | amTimeAgo | titlecase }}
+	</span>
+	<ng-container [ngSwitch]="notification.type">
+		<mat-list-item *ngSwitchCase="NotificationType.APPOINTMENT_CREATED">
+			<div mat-line><b>Nueva reservación</b></div>
+			<div mat-line>
+        Han reservado un turno para el
+        {{ notification.payload.date.format('DD/MM/YYYY, [a las] h:mm A') }}
+			</div>
+		</mat-list-item>
+		<mat-list-item *ngSwitchCase="NotificationType.APPOINTMENT_CANCELLED">
+			<div mat-line><b>Reservación cancelada</b></div>
+			<div mat-line>
+				Han cancelado el turno para el  
+        {{ notification.payload.date.format('DD/MM/YYYY, [a las] h:mm A') }} 
+			</div>
+		</mat-list-item>
+	</ng-container>
+</mat-list>
+<mat-dialog-actions align="end">
+	<button 
+		mat-raised-button 
+		color="accent"
+		(click)="onClick()">
+		Ver turno
+	</button>
+</mat-dialog-actions>

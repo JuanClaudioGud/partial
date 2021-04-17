@@ -1,0 +1,13 @@
+[mat-dialog-title] {
+	display: flex;
+	flex-direction: column;
+	span {
+		font-size: 14px;
+		color: rgba(0, 0, 0, .54);
+	}
+}
+
+.mat-line {
+  word-break: break-all !important;
+  white-space: normal !important;
+}

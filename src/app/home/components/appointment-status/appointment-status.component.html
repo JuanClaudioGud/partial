@@ -1,0 +1,51 @@
+<mat-toolbar color="primary" mat-dialog-title>
+	Estado: {{ appointment.status | status }}
+</mat-toolbar>
+
+<mat-list mat-dialog-content>
+	<span mat-subheader>Detalles</span>
+
+	<mat-divider></mat-divider>
+	
+	<mat-list-item>
+		<mat-icon matListIcon>event</mat-icon>
+		<span matLine>
+			{{ appointment.date.format('DD/MM/YYYY') }}
+		</span>
+	</mat-list-item>
+  <mat-list-item>
+		<mat-icon matListIcon>schedule</mat-icon>
+		<span matLine>
+			{{ appointment.date.format('HH:mm A') }}
+		</span>
+	</mat-list-item>
+	<mat-list-item>
+		<mat-icon matListIcon>room_service</mat-icon>
+		<span matLine>
+			{{ appointment.treatment.name }}
+		</span>
+	</mat-list-item>
+	<mat-list-item>
+		<mat-icon matListIcon>attach_money</mat-icon>
+		<span matLine>
+			{{ appointment.treatment.price }}
+		</span>
+	</mat-list-item>
+</mat-list>
+
+<mat-dialog-actions align="end">
+	<button 
+		mat-button
+		mat-stroked-button 
+		color="primary"
+		[disabled]="appointment.status === AppointmentStatus.CANCELLED"
+		appConfirm
+		(confirm)="onCancel()">
+		Cancelar
+	</button>
+	<button
+		mat-button
+    mat-dialog-close>
+		Cerrar
+	</button>
+</mat-dialog-actions>

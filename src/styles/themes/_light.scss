@@ -1,0 +1,5 @@
+@include mat-core($typography);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);

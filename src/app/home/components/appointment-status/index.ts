@@ -1,0 +1,1 @@
+export { AppointmentStatusComponent } from './appointment-status.component';

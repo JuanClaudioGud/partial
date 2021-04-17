@@ -1,0 +1,51 @@
+<ng-container [ngSwitch]="selection.selected.length > 0">
+  <app-selectionbar 
+    *ngSwitchCase="true"
+    background="accent"
+    [viewIcon]="false"
+    [count]="selection.selected.length"
+    (cancel)="selection.clear()"
+    (delete)="delete(selectedValues)"
+    (edit)="edit(selectedValue)">
+  </app-selectionbar>
+  <app-toolbar 
+    *ngSwitchCase="false"
+    title="Períodos de indisponibilidad"
+    background="primary"
+    [searchIcon]="false">
+  </app-toolbar>
+</ng-container>
+<div class="list-container">
+  <mat-selection-list #list>
+  	<ng-container *ngIf="items.length > 0; else emptyTemplate">
+      <mat-list-item *ngIf="items.length > 1">
+        <mat-checkbox 
+          matListIcon
+          [checked]="selection.hasValue() && isAllSelected"
+          [indeterminate]="selection.hasValue() && !isAllSelected"
+          (change)="isAllSelected ? list.deselectAll() : list.selectAll()">
+        </mat-checkbox>
+        <div mat-line>Seleccionar todo</div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-option
+        *ngFor="let item of items"
+        [value]="item">
+        <div mat-line><b>{{ item.reason }}</b></div>
+        <div mat-line>{{ item.startDate.format('DD/MM/YYYY') }} - {{ item.endDate.format('DD/MM/YYYY') }}</div>
+        <mat-divider></mat-divider>
+      </mat-list-option>
+    </ng-container>
+  </mat-selection-list>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-state">
+    <h3>No hay períodos de indisponibilidad para mostrar</h3>
+  </div>
+</ng-template>
+<button 
+  mat-fab
+  color="primary"
+  (click)="add()">
+  <mat-icon>add</mat-icon>
+</button>

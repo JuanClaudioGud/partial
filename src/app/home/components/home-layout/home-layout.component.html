@@ -1,0 +1,185 @@
+<header>
+  <div class="uk-container">
+    <div class="uk-flex-between uk-flex-middle" uk-grid>
+      <div class="uk-width-auto uk-width-auto@l uk-width-1-1@s">
+        <a class="uk-logo" href="/">
+          <img src="/assets/images/logo.png">
+        </a>
+      </div>
+      <div class="uk-width-expand@m uk-width-auto">
+        <a 
+          class="icon-info uk-hidden@m"
+          uk-icon="info" 
+          uk-toggle="target: #offcanvas-info">
+        </a>
+        <div class="uk-grid-small uk-flex-right@l uk-visible@m" uk-grid>
+          <div>
+            <a href="tel:numerodetupeluqueria">
+              <p class="color-text">¿Tenés dudas? Llamanos!</p>
+              <h5>1-800-23-456-7890</h5>
+            </a>
+          </div>
+          <div>
+            <a style="pointer-events: none;" class="uk-flex">
+              <i class="uk-icon-button" uk-icon="home"></i>
+              <span>
+                <p class="color-text">Bv. Avellaneda 1516</p>
+                <p>Rosario, Santa Fe</p>
+              </span>
+            </a>
+          </div>
+          <div>
+            <a class="uk-flex" href="mailto:contacto@tupeluqueria.com">
+              <i class="uk-icon-button" uk-icon="mail"></i>
+              <span>
+                <p class="color-text">Enviá un correo a</p>
+                <p>contacto@tupeluqueria.com</p>
+              </span>
+            </a>
+          </div>
+          <div>
+            <a href="" class="uk-icon-button" uk-icon="facebook"></a>
+            <a href="" class="uk-icon-button" uk-icon="twitter"></a>
+            <a href="" class="uk-icon-button" uk-icon="instagram"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav uk-sticky="cls-active: sticky">
+  <div class="uk-container">
+    <div class="uk-navbar">
+      <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav uk-visible@m">
+          <li>
+            <a 
+              routerLink="/"
+              [class.active]="router.url === '/'">
+              Inicio
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/"
+              fragment="services"
+              [class.active]="router.url === '/#services'">
+              Servicios
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/"
+              fragment="about-us"
+              [class.active]="router.url === '/#about-us'">
+              Sobre Nosotros
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/contact"
+              routerLinkActive="active">
+              Contacto
+            </a>
+          </li>
+        </ul>
+        <a 
+          class="uk-navbar-toggle uk-hidden@m" 
+          uk-navbar-toggle-icon
+          uk-toggle="target: #offcanvas-menu">
+        </a>
+      </div>
+      <div class="uk-navbar-right">
+        <a appBookingTrigger>RESERVAR TURNO</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="offcanvas-menu" uk-offcanvas>
+  <div class="uk-offcanvas-bar">
+    <button 
+      class="uk-offcanvas-close"  
+      uk-close>
+    </button>
+    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-large-top">
+      <li>
+        <a 
+          routerLink="/" 
+          [class.active]="router.url === '/'"
+          uk-toggle="target: #offcanvas">
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a 
+          routerLink="/"
+          fragment="services"
+          [class.active]="router.url === '/#services'"
+          uk-toggle="target: #offcanvas">
+          Servicios
+        </a>
+      </li>
+      <li>
+        <a 
+          routerLink="/"
+          fragment="about"
+          [class.active]="router.url === '/#about'"
+          uk-toggle="target: #offcanvas">
+          Sobre Nosotros
+        </a>
+      </li>
+      <li>
+        <a 
+          routerLink="/contact"
+          routerLinkActive="active"
+          uk-toggle="target: #offcanvas">
+          Contacto
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="offcanvas-info" uk-offcanvas="flip: true">
+  <div class="uk-offcanvas-bar">
+    <button 
+      class="uk-offcanvas-close"  
+      uk-close>
+    </button>
+    <div class="uk-margin-large-top" uk-grid>
+      <div>
+        <a href="tel:numerodetupeluqueria">
+          <p class="color-text">¿Tenés dudas? Llamanos!</p>
+          <h5>1-800-23-456-7890</h5>
+        </a>
+      </div>
+      <div>
+        <a style="pointer-events: none;" class="uk-flex">
+          <span>
+            <p class="color-text">Bv. Avellaneda 1516</p>
+            <p>Rosario, Santa Fe</p>
+          </span>
+        </a>
+      </div>
+      <div>
+        <a class="uk-flex" href="mailto:contacto@tupeluqueria.com">
+          <span>
+            <p class="color-text">Enviá un correo a</p>
+            <p>contacto@tupeluqueria.com</p>
+          </span>
+        </a>
+      </div>
+      <div>
+        <a href="" class="uk-icon-button" uk-icon="facebook"></a>
+        <a href="" class="uk-icon-button" uk-icon="twitter"></a>
+        <a href="" class="uk-icon-button" uk-icon="instagram"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

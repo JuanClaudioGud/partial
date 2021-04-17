@@ -1,0 +1,1 @@
+export { NotificationsIconComponent } from './notifications-icon.component';

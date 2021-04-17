@@ -1,0 +1,145 @@
+<footer class="uk-section-secondary uk-section-large">
+  <div class="uk-container">
+    <div class="uk-child-width-1-3@m" uk-grid>
+      <div>
+        <div class="section-title">
+          <h3>
+            <img src="/assets/images/logo2.png" alt="Logo">
+          </h3>
+          <div class="uk-width-1-6@m title-divider"></div>
+          <p>These days are Happy and Free these days are all share them with me baby the Brady Bunch the Brady Bunch at the way we all became the Brady Bunch Flipper Flipper.</p>
+          <div class="uk-margin-small-bottom">
+            <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="facebook"></a>
+            <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="twitter"></a>
+            <a href="" class="uk-icon-button" uk-icon="instagram"></a>
+          </div>
+          <button *ngIf="router.url !== '/contact'" class="
+            section-btn
+            uk-button 
+            uk-button-primary 
+            uk-margin-top"
+            routerLink="/contact">
+            Contáctanos
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">
+          <h3>Horarios</h3>
+          <div class="uk-width-1-6@m title-divider"></div>
+          <p>They call him Flipper Flipper faster than lightning. No one you see is smarter than he so join us her are sure to get a smile from seven stranded.</p>
+        </div>
+        <div class="working-hours">
+          <ul class="uk-list uk-list-collapse">
+            <li>Lunes a Jueves</li>
+            <li>8.00AM a 12.00AM</li>
+            <li>1.00PM a 4.00PM</li>
+            <li>5.00PM a 8.00PM</li>
+          </ul>
+          <hr class="uk-divider-vertical uk-visible@m">
+          <hr class="uk-divider-small uk-hidden@m">
+          <ul class="uk-list uk-list-collapse">
+            <li>Viernes a Domingo</li>
+            <li>8.00AM a 11.00AM</li>
+            <li>12.00PM a 3.00PM</li>
+            <li>4.00PM a 6.00PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="contact-details"> 
+        <div class="section-title">
+          <h3>Contáctanos</h3>
+          <div class="uk-width-1-6@m title-divider"></div>
+        </div>
+        <div class="uk-margin-top"> 
+          <div>
+            <a class="uk-flex uk-flex-middle" href="tel:numerodetupeluqueria">
+              <i class="uk-icon-button" uk-icon="phone"></i>
+              <span class="uk-margin-small-left">
+                <p class="color-text">¿Tenés dudas? Llamanos!</p>
+                <b>1-800-23-456-7890</b>
+              </span>
+            </a>
+          </div>
+          <div class="uk-margin-top">
+            <a style="pointer-events: none;" class="uk-flex uk-flex-middle">
+              <i class="uk-icon-button" uk-icon="home"></i>
+              <span class="uk-margin-small-left">
+                <p class="color-text">Bv. Avellaneda 1516</p>
+                <p>Rosario, Santa Fe</p>
+              </span>
+            </a>
+          </div>
+          <div class="uk-margin-top">
+            <a class="uk-flex uk-flex-middle" href="mailto:contacto@tupeluqueria.com">
+              <i class="uk-icon-button" uk-icon="mail"></i>
+              <span class="uk-margin-small-left">
+                <p class="color-text">Enviá un correo a</p>
+                <p>contacto@tupeluqueria.com</p>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<section id="footer" class="uk-section-xsmall">
+  <div class="uk-container">
+    <div class="
+      uk-child-width-1-1 
+      uk-child-width-expand@m 
+      uk-flex-middle 
+      uk-text-center 
+      uk-text-left@m" 
+      uk-grid>
+      <small>
+        2021 &copy; TuPeluqueria. Todos los derechos reservados.
+      </small>
+      <div class="uk-visible@m">
+        <ul class="uk-navbar-nav">
+          <li>
+            <a 
+              routerLink="/"
+              [class.active]="router.url === '/'">
+              Inicio
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/"
+              fragment="services"
+              [class.active]="router.url === '/#services'">
+              Servicios
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/"
+              fragment="about"
+              [class.active]="router.url === '/#about'">
+              Sobre Nosotros
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/contact"
+              routerLinkActive="active">
+              Contacto
+            </a>
+          </li>
+          <li>
+            <a 
+              routerLink="/acp">
+              ADMINISTRACIÓN
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

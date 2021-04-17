@@ -1,0 +1,79 @@
+<h3 mat-dialog-title>Editar período</h3>
+
+<mat-dialog-content>
+	<form [formGroup]="form" layout="column">
+		<mat-form-field class="dateFormField" appearance="fill" required>
+		  <mat-label>Periódo de indisponibilidad</mat-label>
+		  <mat-date-range-input [rangePicker]="picker">
+		    <input 
+		    	matStartDate 
+		    	formControlName="startDate" 
+		    	placeholder="Desde"
+		    	(click)="picker.open()">
+		    <input 
+		    	matEndDate 
+		    	formControlName="endDate" 
+		    	placeholder="Hasta"
+		    	(click)="picker.open()">
+		  </mat-date-range-input>
+		  <mat-datepicker-toggle 
+		  	matSuffix 
+		  	[for]="picker">	
+		  </mat-datepicker-toggle>
+		  <mat-date-range-picker 
+		  	#picker 
+		  	[touchUi]="mediaService.isSmallScreen() | async">
+		  </mat-date-range-picker>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label>Descripción</mat-label>
+			<input 
+				type="text" 
+				formControlName="reason"
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'reason' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button 
+		mat-button 
+		color="primary" 
+		mat-dialog-close>
+		Cancelar
+	</button>
+	<button 
+		mat-raised-button 
+		color="accent" 
+		[disabled]="form.invalid"
+		appConfirm
+		(confirm)="onSubmit(formData)">
+		Aceptar
+	</button>
+</mat-dialog-actions>
+
+<ng-template #errorsTemplate let-controlName>
+	<ng-container *ngFor="let error of form.controls[controlName].errors | keyvalue">
+		<ng-container 
+			*ngTemplateOutlet="errorTemplate; 
+			context: { $implicit: error.key }">
+		</ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #errorTemplate let-error>
+	<ng-container [ngSwitch]="error">
+    <ng-container *ngSwitchCase="'required'">
+      Este campo es obligatorio
+    </ng-container>
+    <ng-container *ngSwitchCase="'maxlength'">
+      La información ingresada es demasiado extensa
+    </ng-container>
+	</ng-container>
+</ng-template>

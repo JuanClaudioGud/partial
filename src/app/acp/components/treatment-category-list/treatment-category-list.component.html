@@ -1,0 +1,62 @@
+<ng-container [ngSwitch]="selection.selected.length > 0">
+  <app-selectionbar 
+    *ngSwitchCase="true"
+    background="accent"
+    [count]="selection.selected.length"
+    (cancel)="selection.clear()"
+    (delete)="delete(selection.selected)"
+    (edit)="edit(selection.selected[0])"
+    (view)="view(selection.selected[0])">
+  </app-selectionbar>
+  <app-toolbar 
+    *ngSwitchCase="false"
+    title="Categorías"
+    background="primary"
+    [searchIcon]="false">
+  </app-toolbar>
+</ng-container>
+<div class="list-container">
+  <mat-list>
+    <ng-container *ngIf="items.length > 0; else emptyTemplate">
+      <mat-list-item *ngIf="items.length > 1">
+        <mat-checkbox 
+          matListIcon
+          [checked]="selection.hasValue() && isAllSelected"
+          [indeterminate]="selection.hasValue() && !isAllSelected"
+          (change)="!$event || masterToggle()">
+        </mat-checkbox>
+        <div mat-line>Seleccionar todo</div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item *ngFor="let item of items">
+        <mat-checkbox 
+          matListIcon
+          [checked]="selection.isSelected(item)"
+          (change)="!$event || selection.toggle(item)">
+        </mat-checkbox>
+        <div mat-line><b>{{ item.name }}</b></div>
+        <div mat-line>{{ item.description }}</div>
+        <div mat-line-end>
+          <mat-slide-toggle 
+            appConfirm
+            [checked]="item.status"
+            (click)="$event.preventDefault()"
+            (confirm)="toggleState(item)">
+          </mat-slide-toggle>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-state">
+    <h3>No hay categorías para mostrar</h3>
+  </div>
+</ng-template>
+<button 
+  mat-fab
+  color="primary"
+  (click)="add()">
+  <mat-icon>add</mat-icon>
+</button>

@@ -1,0 +1,1 @@
+export { NotificationAdapter } from './notification.adapter';

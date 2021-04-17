@@ -1,0 +1,19 @@
+<mat-list mat-dialog-content>
+	<h3>{{ treatment.name }}</h3>
+	<mat-list-item>
+		<div mat-line><b>Duración</b></div>
+		<div mat-line>{{ treatment.duration | duration }}</div>
+	</mat-list-item>
+	<mat-list-item>
+		<div mat-line><b>Categoría</b></div>
+		<div mat-line>{{ treatment.category ? treatment.category.name : 'Ninguna' }}</div>
+	</mat-list-item>
+	<mat-list-item>
+		<div mat-line><b>Precio</b></div>
+		<div mat-line>{{ treatment.price | currency }}</div>
+	</mat-list-item>
+	<mat-list-item>
+		<div mat-line><b>Estado</b></div>
+		<div mat-line>{{ treatment.status ? 'Activo' : 'Inactivo' }}</div>
+	</mat-list-item>
+</mat-list>

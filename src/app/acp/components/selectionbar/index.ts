@@ -1,0 +1,1 @@
+export { SelectionbarComponent } from './selectionbar.component';

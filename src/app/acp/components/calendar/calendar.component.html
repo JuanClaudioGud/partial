@@ -1,0 +1,113 @@
+<ng-container *ngIf="isSmallScreen; else lgScreenTemplate">
+  <app-toolbar 
+    title="Calendario"
+    [searchIcon]="false">
+  </app-toolbar>
+  <ng-container 
+		*ngTemplateOutlet="calendarTemplate">
+	</ng-container>
+</ng-container>
+
+<ng-template #lgScreenTemplate>
+	<div
+		layout
+		layout-wrap
+		layout-padding>
+		<div flex="100">
+			<div class="mat-elevation-z8">	
+				<ng-container 
+					*ngTemplateOutlet="calendarTemplate">
+				</ng-container>
+			</div>
+		</div>	
+	</div>
+</ng-template>
+
+<ng-template #calendarTemplate>
+	<mat-toolbar color="primary">
+		<button 
+			mat-icon-button 
+			mwlCalendarToday
+			[(viewDate)]="viewDate">
+			<mat-icon>today</mat-icon>
+		</button>
+		<div 
+			layout="row" 
+			layout-align="center center">
+			<button
+				mat-icon-button 
+				mwlCalendarPreviousView
+				[view]="view"
+				[(viewDate)]="viewDate">
+				<mat-icon>chevron_left</mat-icon>
+			</button>
+			<h3>{{ viewDate | date }}</h3>
+			<button 
+				mat-icon-button 
+				mwlCalendarNextView
+				[view]="view"
+				[(viewDate)]="viewDate">
+				<mat-icon>chevron_right</mat-icon>
+			</button>
+		</div>
+		<button 
+			mat-icon-button 
+			[matMenuTriggerFor]="chooseView">
+			<mat-icon>more_vert</mat-icon>
+			<mat-menu #chooseView="matMenu">
+				<button 
+					*ngIf="view !== CalendarView.Month" 
+					mat-menu-item 
+					(click)="view = CalendarView.Month">
+					Mes
+				</button>
+				<button 
+					*ngIf="view !== CalendarView.Week" 
+					mat-menu-item 
+					(click)="view = CalendarView.Week">
+					Semana
+				</button>
+	  		<button 
+	  			*ngIf="view !== CalendarView.Day" 
+	  			mat-menu-item 
+	  			(click)="view = CalendarView.Day">
+	  			Día
+	  		</button>
+			</mat-menu>
+		</button>
+	</mat-toolbar>
+
+	<ng-container [ngSwitch]="view">
+		<mwl-calendar-month-view 
+			*ngSwitchCase="CalendarView.Month"
+			[@.disabled]="true"
+			[viewDate]="viewDate"
+			[events]="events"
+			[cellTemplate]="customCellTemplate"
+			[activeDayIsOpen]="true"
+			(dayClicked)="viewDate = $event.day.date"
+			(eventClicked)="onEventClick($event.event)">
+		</mwl-calendar-month-view>
+		<mwl-calendar-week-view 
+			*ngSwitchCase="CalendarView.Week"
+			[viewDate]="viewDate"
+			[hourSegments]="4"
+			[events]="events"
+			(eventClicked)="onEventClick($event.event)">
+		</mwl-calendar-week-view>
+		<mwl-calendar-day-view 
+			*ngSwitchCase="CalendarView.Day"
+			[viewDate]="viewDate"
+			[hourSegments]="4"
+			[events]="events"
+			(eventClicked)="onEventClick($event.event)">
+		</mwl-calendar-day-view>
+	</ng-container>
+
+	<ng-template #customCellTemplate let-day="day" let-locale="locale">
+	  <div class="cal-cell-top">
+	    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+	    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+	  </div>
+	</ng-template>
+</ng-template>

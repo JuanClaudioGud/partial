@@ -1,0 +1,11 @@
+<app-appointment-list 
+	*ngIf="mediaService.isSmallScreen() | async; else tableTemplate"
+	[appointments]="route.snapshot.data.appointments"
+	[treatments]="route.snapshot.data.treatments">
+</app-appointment-list>
+<ng-template #tableTemplate>
+	<app-appointments-table
+		[appointments]="route.snapshot.data.appointments"
+		[treatments]="route.snapshot.data.treatments">
+	</app-appointments-table>
+</ng-template>

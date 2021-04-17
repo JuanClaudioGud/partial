@@ -1,0 +1,1 @@
+export { WorkingDayListComponent } from './working-day-list.component';

@@ -1,0 +1,43 @@
+@import 'abstracts/mixins';
+
+:host {
+  display: block;
+}
+
+.empty-state {
+  
+  margin-top: 112px;
+  text-align: center;
+
+  mat-icon {
+    font-size: 60px;
+    color: #b9b9b9;
+  }
+
+  button {
+    margin-top: 8px;
+  }
+}
+
+.mat-column-select,
+.mat-column-status {
+  overflow: visible !important;
+}
+
+table {
+  width: 100%;
+  @include gt-sm {
+    table-layout: fixed;
+    th, td {
+      overflow: hidden;
+      width:auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+table.selectable .mat-row:hover {
+  background-color: rgba(0, 0, 0, .087);
+  cursor: pointer;
+}

@@ -1,0 +1,119 @@
+<ng-container *ngIf="!isSearching; else searchTemplate">
+  <app-toolbar 
+  	*ngIf="selection.selected.length === 0; else selectionbarTemplate"
+    title="Turnos"
+    (search)="search$.next(true)">
+  </app-toolbar>
+  <mat-tab-group 
+  	color="accent"
+  	backgroundColor="primary"
+  	mat-align-tabs="center"
+  	[animationDuration]="0"
+  	[disablePagination]="true"
+  	[selectedIndex]="currentTab"
+  	(selectedIndexChange)="tabChange$.next($event)">
+  	<mat-tab 
+  		*ngFor="let tab of tabs"
+  		[label]="tab">
+  		<ng-container 
+        *ngTemplateOutlet="listTemplate">
+      </ng-container>		
+  	</mat-tab>
+  </mat-tab-group>
+</ng-container>
+<ng-template #searchTemplate>
+	<app-searchbar 
+    *ngIf="selection.selected.length === 0; else selectionbarTemplate"
+    (change)="searchTerm($event)"
+    (cancel)="search$.next(false)">
+  </app-searchbar>
+	<div class="list-container">
+    <ng-container 
+      *ngTemplateOutlet="listTemplate">
+    </ng-container>
+  </div>
+</ng-template>
+<ng-template #selectionbarTemplate>
+  <app-selectionbar
+    background="accent"
+    [count]="selection.selected.length"
+    (cancel)="selection.clear()"
+    (delete)="delete(selection.selected)"
+    (edit)="edit(selection.selected[0])"
+    (view)="view(selection.selected[0])">
+  </app-selectionbar>
+</ng-template>
+<ng-template #listTemplate>
+	<mat-list *ngIf="items.length; else emptyTemplate">
+		<mat-list-item *ngIf="items.length > 1">
+      <mat-checkbox 
+        matListIcon
+        [checked]="selection.hasValue() && isAllSelected"
+        [indeterminate]="selection.hasValue() && !isAllSelected"
+        (change)="!$event || masterToggle()">
+      </mat-checkbox>
+      <div mat-line>Seleccionar todo</div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <ng-container *ngFor="let item of items">
+      <ng-container [ngSwitch]="currentTab === 1 && !isSearching">
+        <mat-list-item *ngSwitchCase="true">
+          <mat-checkbox 
+            matListIcon
+            [checked]="selection.isSelected(item)"
+            (change)="!$event || selection.toggle(item)">
+          </mat-checkbox>
+          <div mat-line>
+            <div layout>
+              <b>{{ item.date.format(dateFormat) }}</b>
+              <small class="text-right" flex>{{ item.status | status }}</small>
+            </div>
+          </div>
+          <div mat-line>{{ item.name }}</div>
+          <div mat-line><small>{{ item.treatment.name }}</small></div>
+          <div mat-line-end>
+            <button 
+              mat-icon-button
+              (click)="
+                selection.clear();
+                openActionSheet(item)">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item *ngSwitchCase="false">
+          <mat-checkbox 
+            matListIcon
+            [checked]="selection.isSelected(item)"
+            (change)="!$event || selection.toggle(item)">
+          </mat-checkbox>
+          <div mat-line><b>{{ item.name }}</b></div>
+          <div mat-line>{{ item.date.format(dateFormat) }}</div>
+          <div mat-line><small>{{ item.status | status }}</small></div>
+          <div mat-line-end>
+            <button 
+              mat-icon-button
+              (click)="
+                selection.clear();
+                openActionSheet(item)">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-container>
+    </ng-container>
+	</mat-list>
+</ng-template>
+<ng-template #emptyTemplate>
+  <div class="empty-state">
+    <h3>No hay turnos para mostrar</h3>
+  </div>
+</ng-template>
+<button 
+  mat-fab
+  color="primary"
+  (click)="add()">
+  <mat-icon>add</mat-icon>
+</button>

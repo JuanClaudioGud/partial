@@ -1,0 +1,42 @@
+<mat-list mat-dialog-content>
+	<span mat-subheader>
+		{{ appointment.date.fromNow() | titlecase }}
+	</span>
+	<h3>Turno con {{ appointment.name }}</h3>
+	<mat-list-item>
+		<mat-icon matListIcon>event</mat-icon>
+		<span matLine>
+			{{ appointment.date.format('DD/MM/YYYY') }}
+		</span>
+	</mat-list-item>
+  <mat-list-item>
+		<mat-icon matListIcon>schedule</mat-icon>
+		<span matLine>
+			{{ appointment.date.format('HH:mm A') }}
+		</span>
+	</mat-list-item>
+	<mat-list-item>
+		<mat-icon matListIcon>room_service</mat-icon>
+		<span matLine>
+			{{ appointment.treatment.name }}
+		</span>
+	</mat-list-item>
+	<mat-list-item>
+		<mat-icon matListIcon>email</mat-icon>
+		<span matLine>
+			{{ appointment.email }}
+		</span>
+	</mat-list-item>
+	<mat-list-item>
+		<mat-icon matListIcon>phone</mat-icon>
+		<span matLine>
+			{{ appointment.phone || 'Ninguno' }}
+		</span>
+	</mat-list-item>
+	<mat-list-item>
+		<mat-icon matListIcon>power_settings_new</mat-icon>
+		<span matLine>
+			{{ appointment.status | status }}
+		</span>
+	</mat-list-item>
+</mat-list>

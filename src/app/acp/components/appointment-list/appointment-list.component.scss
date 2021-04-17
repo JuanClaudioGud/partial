@@ -1,0 +1,6 @@
+@import 'components/list';
+@import 'abstracts/mixins';
+
+mat-tab-group::ng-deep .mat-tab-body-wrapper {
+	height: calc(100vh - 104px);
+}

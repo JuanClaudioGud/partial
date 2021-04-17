@@ -1,0 +1,1 @@
+export { SidenavToggleDirective } from './sidenav-toggle.directive';

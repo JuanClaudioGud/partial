@@ -1,0 +1,118 @@
+<h3 mat-dialog-title>Editar tratamiento</h3>
+
+<mat-dialog-content>
+	<form [formGroup]="form" layout="column">
+		<mat-form-field appearance="fill" required>
+			<mat-label>Nombre</mat-label>
+			<input 
+				type="text" 
+				formControlName="name" 
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'name' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Duración</mat-label>
+			<mat-select formControlName="duration">
+				<mat-option 
+					*ngFor="let time of times" 
+					[value]="time">
+					{{ time | duration }}
+				</mat-option>
+			</mat-select>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'duration' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Precio</mat-label>
+			<mat-icon matPrefix>attach_money</mat-icon>
+			<input 
+				type="number" 
+				formControlName="price" 
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'price' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Categoría</mat-label>
+			<mat-select 
+				formControlName="category" 
+				[compareWith]="compareFn">
+				<mat-option 
+					*ngFor="let category of data.categories" 
+					[value]="category">
+					{{ category.name }}
+				</mat-option>
+			</mat-select>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'category' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Estado</mat-label>
+			<mat-select formControlName="status">
+        <mat-option [value]="true">
+          Activo
+        </mat-option>
+        <mat-option [value]="false">
+          Inactivo
+        </mat-option>
+			</mat-select>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'status' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button 
+		mat-button 
+		color="primary" 
+		mat-dialog-close>
+		Cancelar
+	</button>
+	<button 
+		mat-raised-button 
+		color="accent" 
+		[disabled]="form.invalid"
+		appConfirm
+		(confirm)="onSubmit(formData)">
+		Aceptar
+	</button>
+</mat-dialog-actions>
+<ng-template #errorsTemplate let-controlName>
+	<ng-container *ngFor="let error of form.controls[controlName].errors | keyvalue">
+		<ng-container 
+			*ngTemplateOutlet="errorTemplate; 
+			context: { $implicit: error.key }">
+		</ng-container>
+	</ng-container>
+</ng-template>
+<ng-template #errorTemplate let-error>
+	<ng-container [ngSwitch]="error">
+    <ng-container *ngSwitchCase="'required'">
+      Este campo es obligatorio
+    </ng-container>
+    <ng-container *ngSwitchCase="'maxlength'">
+      La información ingresada es demasiado extensa
+    </ng-container>
+	</ng-container>
+</ng-template>

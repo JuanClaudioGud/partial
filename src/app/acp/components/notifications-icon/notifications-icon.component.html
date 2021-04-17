@@ -1,0 +1,72 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu">
+  <mat-icon 
+  	matBadgeSize="small" 
+  	matBadgeColor="warn"
+  	[matBadge]="notifications.length"
+    [matBadgeHidden]="!notifications.length">
+  	notifications
+ 	</mat-icon>
+ 	<mat-menu #menu="matMenu">
+ 		<mat-list>
+ 			<ng-container *ngIf="notifications.length; else emptyTemplate">
+        <ng-container *ngFor="let notification of notifications">
+          <ng-container [ngSwitch]="notification.type">
+            <mat-list-item
+              *ngSwitchCase="NotificationType.APPOINTMENT_CREATED"
+              (click)="$event.preventDefault();"
+              (click)="$event.stopPropagation();"
+              (click)="onClick(notification);">
+              <div mat-line><b>Turnos</b></div>
+              <div mat-line>
+                Han reservado un turno para el 
+                {{ notification.payload.date.format('DD/MM/YYYY, [a las] h:mm A') }}
+              </div>
+              <div mat-line>
+                <small>{{ notification.createdAt | amTimeAgo | titlecase }}</small>
+              </div>
+              <div mat-line-end>
+                <button 
+                  mat-icon-button 
+                  (click)="$event.preventDefault();"
+                  (click)="$event.stopPropagation();"
+                  (click)="onClose($event, notification)">
+                  <mat-icon>close</mat-icon>              
+                </button>
+              </div>
+            </mat-list-item>
+            <mat-list-item 
+              *ngSwitchCase="NotificationType.APPOINTMENT_CANCELLED"
+              (click)="$event.preventDefault();"
+              (click)="$event.stopPropagation();"
+              (click)="onClick(notification);">
+              <div mat-line><b>Turnos</b></div>
+              <div mat-line>
+                Han cancelado el turno para el 
+                {{ notification.payload.date.format('DD/MM/YYYY, [a las] h:mm A') }} 
+              </div>
+              <div mat-line>
+                <small>{{ notification.createdAt | amTimeAgo | titlecase }}</small>
+              </div>
+              <div mat-line-end>
+                <button 
+                  mat-icon-button 
+                  (click)="$event.preventDefault();"
+                  (click)="$event.stopPropagation();"
+                  (click)="onClose($event, notification)">
+                  <mat-icon>close</mat-icon>              
+                </button>
+              </div>              
+            </mat-list-item>
+          </ng-container>
+        </ng-container>
+ 			</ng-container>
+ 			<ng-template #emptyTemplate>
+ 				<mat-list-item style="pointer-events: none !important;">
+          <div mat-line>No hay notificaciones</div>   
+        </mat-list-item>
+ 			</ng-template>
+ 		</mat-list>
+ 	</mat-menu>
+</button>

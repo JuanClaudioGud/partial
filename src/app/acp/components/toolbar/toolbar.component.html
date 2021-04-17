@@ -1,0 +1,27 @@
+<mat-toolbar [color]="background">
+	<button 
+    show-sm 
+    hide-gt-sm
+    mat-icon-button
+    appSidenavToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h3 flex>{{ title }}</h3>
+  <button
+    *ngIf="addIcon"
+    hide 
+    show-gt-sm
+    mat-icon-button 
+    (click)="add.emit()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button 
+    *ngIf="searchIcon"
+    mat-icon-button 
+    (click)="search.emit()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <app-notifications-icon 
+    hide-gt-xs>
+  </app-notifications-icon>
+</mat-toolbar>

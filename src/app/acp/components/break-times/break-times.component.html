@@ -1,0 +1,11 @@
+<app-break-time-list 
+	*ngIf="mediaService.isSmallScreen() | async; else tableTemplate"
+	[breakTimes]="route.snapshot.data.breakTimes"
+	[workingDays]="route.snapshot.data.workingDays">
+</app-break-time-list>
+<ng-template #tableTemplate>
+	<app-break-times-table
+		[breakTimes]="route.snapshot.data.breakTimes"
+		[workingDays]="route.snapshot.data.workingDays">
+	</app-break-times-table>
+</ng-template>

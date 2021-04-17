@@ -1,0 +1,9 @@
+export { HomeLayoutComponent } from './home-layout';
+export { HomeComponent } from './home';
+export { ErrorComponent } from './error';
+export { ContactComponent } from './contact';
+export { FooterComponent } from './footer';
+export { LoginComponent } from './login';
+export { BookingComponent } from './booking';
+export { CheckStatusComponent } from './check-status';
+export { AppointmentStatusComponent } from './appointment-status';

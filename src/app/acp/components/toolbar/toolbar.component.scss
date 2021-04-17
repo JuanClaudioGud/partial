@@ -1,0 +1,14 @@
+@import 'abstracts/mixins';
+
+:host {
+	display: block;
+}
+
+mat-toolbar > *:first-child {
+	margin-right: 16px;
+}
+
+h3 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

@@ -1,0 +1,9 @@
+<app-unavailability-list 
+	*ngIf="mediaService.isSmallScreen() | async; else tableTemplate"
+	[unavailabilities]="route.snapshot.data.unavailabilities">
+</app-unavailability-list>
+<ng-template #tableTemplate>
+	<app-unavailabilities-table
+		[unavailabilities]="route.snapshot.data.unavailabilities">
+	</app-unavailabilities-table>
+</ng-template>

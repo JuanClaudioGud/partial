@@ -1,0 +1,9 @@
+<app-treatment-category-list 
+	*ngIf="mediaService.isSmallScreen() | async; else tableTemplate"
+	[categories]="route.snapshot.data.treatmentCategories">
+</app-treatment-category-list>
+<ng-template #tableTemplate>
+	<app-treatment-categories-table
+		[categories]="route.snapshot.data.treatmentCategories">
+	</app-treatment-categories-table>
+</ng-template>

@@ -1,0 +1,70 @@
+<ng-container [ngSwitch]="isSearching">
+  <app-searchbar 
+    *ngSwitchCase="true"
+    (change)="search($event)"
+    (cancel)="isSearching = false">
+  </app-searchbar>
+  <ng-container *ngSwitchCase="false">
+    <ng-container [ngSwitch]="selection.selected.length > 0">
+      <app-selectionbar
+        *ngSwitchCase="true"
+        background="accent"
+        [count]="selection.selected.length"
+        (cancel)="selection.clear()"
+        (delete)="delete(selection.selected)"
+        (edit)="edit(selection.selected[0])"
+        (view)="view(selection.selected[0])">
+      </app-selectionbar>
+      <app-toolbar 
+        *ngSwitchCase="false" 
+        background="primary"
+        title="Tratamientos"
+        (search)="isSearching = true">
+      </app-toolbar>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<div>
+  <mat-list *ngIf="items.length; else emptyTemplate">
+    <mat-list-item *ngIf="items.length > 1">
+      <mat-checkbox 
+        matListIcon
+        [checked]="selection.hasValue() && isAllSelected"
+        [indeterminate]="selection.hasValue() && !isAllSelected"
+        (change)="!$event || masterToggle()">
+      </mat-checkbox>
+      <div mat-line>Seleccionar todo</div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <ng-container *ngFor="let item of items">
+      <mat-list-item>
+        <mat-checkbox 
+          matListIcon
+          [checked]="selection.isSelected(item)"
+          (change)="!$event || selection.toggle(item)">
+        </mat-checkbox>
+        <div mat-line><b>{{ item.name }}</b></div>
+        <div mat-line>{{ item.duration | duration }}</div>
+        <div mat-line><small>{{ item.price | currency }}</small></div>
+        <mat-slide-toggle 
+          appConfirm
+          [checked]="item.status"
+          (click)="$event.preventDefault()"
+          (confirm)="toggleState(item)">
+        </mat-slide-toggle>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-state">
+    <h3>No hay tratamientos para mostrar</h3>
+  </div>
+</ng-template>
+<button 
+  mat-fab
+  color="primary"
+  (click)="add()">
+  <mat-icon>add</mat-icon>
+</button>

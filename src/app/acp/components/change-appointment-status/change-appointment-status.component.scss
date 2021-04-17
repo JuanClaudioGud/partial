@@ -1,0 +1,8 @@
+mat-radio-group {
+	display: flex;
+	flex-direction: column;
+}
+
+mat-radio-group::ng-deep mat-radio-button:not(:last-of-type) {
+	margin-bottom: 24px;
+}

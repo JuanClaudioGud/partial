@@ -1,0 +1,1 @@
+export { NotificationsTableComponent } from './notifications-table.component';

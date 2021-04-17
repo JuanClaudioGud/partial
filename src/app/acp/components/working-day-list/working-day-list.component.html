@@ -1,0 +1,18 @@
+<app-toolbar 
+  title="Dias laborales"
+  background="primary"
+  [searchIcon]="false"
+  [addIcon]="false">
+</app-toolbar>
+<div class="list-container">
+  <mat-action-list>
+    <mat-list-item 
+      *ngFor="let item of items" 
+      (click)="edit(item)">
+      <div mat-line><b>{{ item.getDayName() | titlecase }}</b></div>
+      <div mat-line>{{ item.openingHour.format('h:mm A') }} - {{ item.closingHour.format('h:mm A') }}</div>
+      <div mat-line><small>{{ item.status ? 'Día laboral' : 'Día no laboral' }}</small></div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-action-list>
+</div>

@@ -1,0 +1,32 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+@import 'base/global';
+@import 'base/helpers';
+
+@import 'layout/grid';
+
+@import 'themes/light';
+
+@import 'vendors/flaticon';
+
+@import 'shame';
+
+$global-font-family: 'PT Sans caption', sans-serif;
+$global-font-size: 13px;
+$global-line-height: 2;
+$global-color: #333;
+$global-inverse-color: #fff;
+$inverse-global-color: rgba($global-inverse-color, 1);
+$base-heading-font-family: 'Roboto Slab', sans-serif;
+$base-heading-font-weight: 700;
+$base-heading-margin-top: 0;
+$base-heading-text-transform: uppercase;
+$global-primary-background: #bf9456;
+$global-secondary-background: #222;
+$global-muted-background: #f7f7f7;
+
+/* UIKit */
+@import "~uikit/src/scss/variables-theme";
+@import "~uikit/src/scss/mixins-theme";
+@import "~uikit/src/scss/uikit-theme";

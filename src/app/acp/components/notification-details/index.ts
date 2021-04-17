@@ -1,0 +1,1 @@
+export { NotificationDetailsComponent } from './notification-details.component';

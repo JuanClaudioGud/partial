@@ -1,0 +1,52 @@
+<mat-sidenav-container>
+  <mat-sidenav 
+  	#sidenav
+  	[mode]="isNotLargeScreen ? 'over' : 'side'" 
+    [opened]="!isNotLargeScreen">
+    <mat-toolbar class="mat-elevation-z1" color="primary">
+      ADMINISTRACIÓN
+    </mat-toolbar>
+    <mat-nav-list>
+      <ng-container *ngFor="let link of links">
+        <mat-list-item 
+        	class="mat-elevation-z1"
+          routerLinkActive="active"
+          [routerLink]="link.path"
+          (click)="!isNotLargeScreen || sidenav.close()">
+          <mat-icon 
+            *ngIf="link.icon" 
+            matListIcon>
+            {{ link.icon }}
+          </mat-icon>
+          <div matLine>{{ link.label }}</div>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar 
+      class="mat-elevation-z1"
+      show-gt-sm
+      hide>
+      <button 
+        mat-icon-button
+        (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span flex></span>
+      <app-notifications-icon></app-notifications-icon>
+      <button 
+        mat-icon-button
+        appConfirm
+        (confirm)="onLogout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+    <footer show-gt-sm hide>
+      2021 &copy; <a href="">Estudio Rosario Digital</a>. Todos los derechos reservados.
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

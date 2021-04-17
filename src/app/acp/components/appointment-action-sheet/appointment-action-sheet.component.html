@@ -1,0 +1,36 @@
+<mat-nav-list>
+	<a 
+		mat-list-item
+		[href]="'tel:' + appointment.phone"
+		(click)="bottomSheetRef.dismiss()">
+		<mat-icon matListIcon>phone</mat-icon>
+		<div mat-line>Marcar</div>
+    <div mat-line>Realizar una llamada</div>
+	</a>
+	<a 
+		mat-list-item
+		[href]="'whatsapp://' + appointment.phone"
+		(click)="bottomSheetRef.dismiss()">
+		<mat-icon matListIcon>message</mat-icon>
+    <div mat-line>Whatsapp</div>
+    <div mat-line>Enviar un mensaje</div>
+	</a>
+	<a
+		mat-list-item 
+		[href]="'mailto:' + appointment.email"
+		(click)="bottomSheetRef.dismiss()">
+		<mat-icon matListIcon>email</mat-icon>
+    <div mat-line>E-mail</div>
+    <div mat-line>Enviar un correo electronico</div>
+	</a>
+	<a 
+		*ngIf="
+			appointment.status !== AppointmentStatus.COMPLETED && 
+			appointment.status !== AppointmentStatus.CANCELLED"
+		mat-list-item 
+		(click)="onClick()">
+		<mat-icon matListIcon>power_settings_new</mat-icon>
+    <div mat-line>Cambiar estado</div>
+    <div mat-line>Modifica el estado del turno</div>
+	</a>
+</mat-nav-list>

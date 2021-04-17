@@ -1,0 +1,1 @@
+export { ROUTER_CONFIGURATION } from './router.config';

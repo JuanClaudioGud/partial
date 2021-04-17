@@ -1,0 +1,37 @@
+@import 'abstracts/mixins';
+
+footer {
+  @include lt-md {
+    text-align: center;
+    .contact-details a {
+      flex-direction: column;
+    }
+  }
+  .section-title {
+    hr {
+      margin-top: -10px;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: inherit;
+    }
+  }
+ .contact-details {
+   p {
+    margin: 0;
+   }
+ }
+}
+
+#footer {
+  background-color: #111;
+  color: white;
+  small {
+    font-size: .875rem;
+    text-transform: uppercase;
+  }
+}
+
+.active {
+  color: #bf9456;
+}

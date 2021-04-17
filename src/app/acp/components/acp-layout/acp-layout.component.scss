@@ -1,0 +1,68 @@
+@import 'abstracts/mixins';
+
+mat-sidenav-container {
+	min-height: 100vh;
+	background-color: #e0e0e0;
+}
+
+mat-sidenav-content {
+
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+
+	section {
+		@include gt-sm {
+			height: calc(100vh - 96px);
+			overflow-y: auto;
+  	}
+	}
+
+	mat-toolbar {
+		z-index: 1;
+	}
+
+	footer {
+		line-height: 32px;
+		padding: 0px 16px;
+		background-color: #f5f5f5;
+		border-top: 1px solid #ddd;
+		text-align: right;
+
+		a {
+			color: $color-primary;
+		}
+
+	}
+
+}
+
+mat-sidenav {
+
+	@include gt-sm {
+		width: 304px;
+	}
+
+	width: 264px;
+	position: fixed;
+	background-color: $color-primary;
+	border-right: 0;
+
+	mat-list-item {
+		color: white !important;
+	}
+	
+	mat-list-item:hover, .active {
+		background-color: $color-accent !important;
+		color: rgba(0, 0, 0, .87) !important;
+	}
+
+	mat-toolbar {
+		justify-content: center !important;
+		background-color: #3e454c !important;
+		color: white !important;
+		font-size: 12px;
+		letter-spacing: 2px;
+	}
+
+}

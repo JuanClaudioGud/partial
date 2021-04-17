@@ -1,0 +1,23 @@
+<h3 mat-dialog-title>Seleccionar estado</h3>
+<mat-radio-group 
+	mat-dialog-content 
+	[(ngModel)]="status">
+	<mat-radio-button 
+		*ngFor="let option of [1,2,3,5,6]" 
+		[value]="option">
+		{{ option | status }}
+	</mat-radio-button>
+</mat-radio-group>
+<mat-dialog-actions>
+	<button 
+		mat-button
+		mat-dialog-close>
+		Cancelar
+	</button>
+	<button 
+		mat-button
+		color="primary"
+		[mat-dialog-close]="status">
+		Aceptar
+	</button>
+</mat-dialog-actions>

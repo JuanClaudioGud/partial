@@ -1,0 +1,92 @@
+<ng-container [ngSwitch]="selection.selected.length > 0">
+  <app-selectionbar 
+    *ngSwitchCase="true"
+    background="accent"
+    [editIcon]="false"
+    [count]="selection.selected.length"
+    (cancel)="selection.clear()"
+    (delete)="delete(selection.selected)"
+    (view)="view(selection.selected[0])">
+  </app-selectionbar>
+  <app-toolbar 
+    *ngSwitchCase="false"
+    title="Notificaciones"
+    background="primary"
+    [searchIcon]="false">
+  </app-toolbar>
+</ng-container>
+<div>
+  <mat-list>
+  	<ng-container *ngIf="items.length > 0; else emptyTemplate">
+      <mat-list-item *ngIf="items.length > 1">
+        <mat-checkbox 
+          matListIcon
+          [checked]="selection.hasValue() && isAllSelected"
+          [indeterminate]="selection.hasValue() && !isAllSelected"
+          (change)="!$event || masterToggle()">
+        </mat-checkbox>
+        <div mat-line>Seleccionar todo</div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item *ngFor="let item of items">
+        <mat-checkbox 
+          matListIcon
+          [checked]="selection.isSelected(item)"
+          (change)="!$event || selection.toggle(item)">
+        </mat-checkbox>
+        <div mat-line>
+          <b>
+            <ng-container [ngSwitch]="item.type">
+              <ng-container *ngSwitchCase="NotificationType.APPOINTMENT_CREATED">
+                Nueva reservación
+              </ng-container>
+              <ng-container *ngSwitchCase="NotificationType.APPOINTMENT_CANCELLED">
+                Reservación cancelada
+              </ng-container>
+            </ng-container>
+          </b>   
+        </div>
+        <div mat-line>
+          {{ item.payload.date.format('DD/MM/YYYY, h:mm A') }}
+        </div>
+        <div mat-line>
+          {{ item.read ? 'Leído' : 'No leído' }}
+        </div>
+        <div mat-line-end>
+      		<button
+      			mat-icon-button
+      			#changeStatusTrigger="matMenuTrigger"
+      			[matMenuTriggerFor]="changeStatusMenu"
+      			[disableRipple]="true"
+        	  (click)="$event.stopPropagation()">
+            <mat-icon>more_vert</mat-icon>
+      			<mat-menu 
+      				#changeStatusMenu="matMenu" 
+      				xPosition="before">
+      				<button 
+      					mat-menu-item
+      					appConfirm
+      					(confirm)="changeStatus(item, true)"
+      					(click)="changeStatusTrigger.closeMenu()">
+      					Marcar como leído
+      				</button>
+      				<button 
+      					mat-menu-item
+      					appConfirm
+      					(confirm)="changeStatus(item, false)"
+      					(click)="changeStatusTrigger.closeMenu()">
+      					Marcar como no leído
+      				</button>
+      			</mat-menu>
+      		</button>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-state">
+    <h3>No hay notificaciones para mostrar</h3>
+  </div>
+</ng-template>

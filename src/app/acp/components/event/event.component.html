@@ -1,0 +1,56 @@
+<h3 mat-dialog-title>
+	{{ data.appointment.name }}
+	<span>{{ data.appointment.treatment.name }}</span>
+</h3>
+
+<mat-divider></mat-divider>
+
+<mat-dialog-content>
+	<mat-list>
+	  <mat-list-item>
+	  	<div layout="column" layout-gt-sm="row">
+	  		<div><b>E-mail</b><span hide show-gt-sm>:&nbsp;</span></div>
+	  		{{ data.appointment.email }}
+	  	</div>
+	  </mat-list-item>
+	  <mat-list-item>
+	  	<div layout="column" layout-gt-sm="row">
+	  		<div><b>Phone</b><span hide show-gt-sm>:&nbsp;</span></div>
+	  		{{ data.appointment.phone || 'Ninguno' }}
+	  	</div>
+	  </mat-list-item>
+	  <mat-list-item>
+	  	<div layout="column" layout-gt-sm="row">
+	  		<div><b>Date</b><span hide show-gt-sm>:&nbsp;</span></div>
+	  		{{ data.appointment.date | date }}
+	  	</div>
+	  </mat-list-item>
+    <mat-list-item>
+      <div layout="column" layout-gt-sm="row">
+        <div><b>Time</b><span hide show-gt-sm>:&nbsp;</span></div>
+        {{ data.appointment.date.format('HH:mm A') }}
+      </div>
+    </mat-list-item>
+	  <mat-list-item>
+	  	<div layout="column" layout-gt-sm="row">
+	  		<div><b>Duration</b><span hide show-gt-sm>:&nbsp;</span></div>
+	  		{{ data.appointment.treatment.duration | duration }}
+	  	</div>
+	  </mat-list-item>
+	 	<mat-list-item>
+	  	<div layout="column" layout-gt-sm="row">
+	  		<div><b>Status</b><span hide show-gt-sm>:&nbsp;</span></div>
+	  		{{ data.appointment.status | status }}
+	  	</div>
+	  </mat-list-item>
+	</mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button 
+		mat-button 
+		color="primary"
+		mat-dialog-close>
+		Cerrar
+	</button>
+</mat-dialog-actions>

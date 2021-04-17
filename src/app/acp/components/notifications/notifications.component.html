@@ -1,0 +1,9 @@
+<app-notification-list 
+	*ngIf="mediaService.isSmallScreen() | async; else tableTemplate"
+	[notifications]="route.snapshot.data.notifications">
+</app-notification-list>
+<ng-template #tableTemplate>
+	<app-notifications-table
+		[notifications]="route.snapshot.data.notifications">
+	</app-notifications-table>
+</ng-template>

@@ -1,0 +1,117 @@
+<section class="uk-section-xlarge">
+  <div class="uk-container"> 
+    <div class="uk-flex-center" uk-grid>
+      <div class="uk-width-1-1 uk-width-1-2@m uk-flex uk-flex-center">
+        <form 
+          class="mat-elevation-z8"
+          layout="column"
+          flex
+          [formGroup]="form">
+          <header class="mat-elevation-z1">
+            <img class="logo" src="/assets/images/logo.png">
+          </header>
+          <mat-form-field appearance="fill" required>
+            <mat-label>E-mail</mat-label>
+            <input 
+              type="text" 
+              formControlName="email" 
+              matInput>
+            <mat-error>
+              <ng-container 
+                *ngTemplateOutlet="errorsTemplate; 
+                context: { $implicit: 'email' }">
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" required>
+            <mat-label>Contraseña</mat-label>
+            <input 
+              type="password" 
+              formControlName="password" 
+              matInput>
+            <mat-error>
+              <ng-container 
+                *ngTemplateOutlet="errorsTemplate; 
+                context: { $implicit: 'password' }">
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+          <button 
+            mat-raised-button 
+            color="accent" 
+            [disabled]="form.invalid"
+            (click)="onSubmit(formData)">
+            Ingresar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div> 
+</section>
+<!--<section class="container" 
+	layout="row" 
+	layout-align="center center">
+  <form 
+  	class="mat-elevation-z8"
+  	layout="column"
+  	flex
+  	[formGroup]="form">
+  	<header class="mat-elevation-z1">
+    	<img class="logo" src="/assets/images/logo.png">
+  	</header>
+		<mat-form-field appearance="fill" required>
+			<mat-label>E-mail</mat-label>
+			<input 
+				type="text" 
+				formControlName="email" 
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'email' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+  	<mat-form-field appearance="fill" required>
+  		<mat-label>Contraseña</mat-label>
+  		<input 
+  			type="password" 
+  			formControlName="password" 
+  			matInput>
+  		<mat-error>
+  			<ng-container 
+  				*ngTemplateOutlet="errorsTemplate; 
+  				context: { $implicit: 'password' }">
+  			</ng-container>
+  		</mat-error>
+  	</mat-form-field>
+  	<button 
+  		mat-raised-button 
+  		color="accent" 
+  		[disabled]="form.invalid"
+  		(click)="onSubmit(formData)">
+  		Ingresar
+  	</button>
+  </form>
+</section>-->
+<ng-template #errorsTemplate let-controlName>
+	<ng-container *ngFor="let error of form.controls[controlName].errors | keyvalue">
+		<ng-container 
+			*ngTemplateOutlet="errorTemplate; 
+			context: { $implicit: error.key }">
+		</ng-container>
+	</ng-container>
+</ng-template>
+<ng-template #errorTemplate let-error>
+	<ng-container [ngSwitch]="error">
+    <ng-container *ngSwitchCase="'required'">
+      Este campo es obligatorio
+    </ng-container>
+    <ng-container *ngSwitchCase="'maxlength'">
+      La información ingresada es demasiado extensa
+    </ng-container>
+    <ng-container *ngSwitchCase="'email'">
+      El email ingresado no es valido
+    </ng-container>
+	</ng-container>
+</ng-template>

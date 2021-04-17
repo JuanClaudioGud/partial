@@ -1,0 +1,53 @@
+<ng-container [ngSwitch]="selection.selected.length > 0">
+  <app-selectionbar 
+    *ngSwitchCase="true"
+    background="accent"
+    [viewIcon]="false"
+    [count]="selection.selected.length"
+    (cancel)="selection.clear()"
+    (delete)="delete(selectedValues)"
+    (edit)="edit(selectedValue)">
+  </app-selectionbar>
+  <app-toolbar 
+    *ngSwitchCase="false"
+    title="Horarios de descanso"
+    [searchIcon]="false">
+  </app-toolbar>
+</ng-container>
+<div class="list-container">
+  <mat-selection-list>
+    <mat-tab-group
+      mat-align-tabs="center"
+      color="accent"
+      backgroundColor="primary"
+      [animationDuration]="0"
+      [selectedIndex]="currentIndex"
+      (selectedIndexChange)="indexChange$.next($event)">
+      <mat-tab 
+        *ngFor="let workingDay of workingDays" 
+        [disabled]="!workingDay.status" 
+        [label]="workingDay.getDayName() | titlecase">
+        <ng-container *ngIf="items.length > 0; else emptyTemplate">
+          <mat-list-option
+            *ngFor="let item of items"
+            [value]="item">
+            <div mat-line><b>{{ item.reason }}</b></div>
+            <div mat-line>{{ item.startTime.format('h:mm A') }} - {{ item.endTime.format('h:mm A') }}</div>
+            <mat-divider></mat-divider>
+          </mat-list-option>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-selection-list>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-state" style="background-color: #e0e0e0;">
+    <h3>No hay horarios para mostrar</h3>
+  </div>
+</ng-template>
+<button 
+  mat-fab
+  color="primary"
+  (click)="add()">
+  <mat-icon>add</mat-icon>
+</button>

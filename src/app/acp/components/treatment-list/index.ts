@@ -1,0 +1,1 @@
+export { TreatmentListComponent } from './treatment-list.component'; 

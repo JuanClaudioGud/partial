@@ -1,0 +1,9 @@
+<app-working-day-list 
+	*ngIf="mediaService.isSmallScreen() | async; else tableTemplate"
+	[workingDays]="route.snapshot.data.workingDays">
+</app-working-day-list>
+<ng-template #tableTemplate>
+	<app-working-days-table
+		[workingDays]="route.snapshot.data.workingDays">
+	</app-working-days-table>
+</ng-template>

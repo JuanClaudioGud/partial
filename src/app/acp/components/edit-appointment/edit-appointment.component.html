@@ -1,0 +1,140 @@
+<h3 mat-dialog-title>Editar turno</h3>
+
+<mat-dialog-content>
+	<form [formGroup]="form" layout="column">
+		<mat-form-field appearance="fill" required>
+			<mat-label>Tratamiento</mat-label>
+			<mat-select 
+				formControlName="treatment" 
+				[compareWith]="compareFn">
+				<mat-option 
+					*ngFor="let treatment of data.treatments" 
+					[value]="treatment">
+					{{ treatment.name }}
+				</mat-option>
+			</mat-select>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'treatment' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Fecha</mat-label>
+			<input 
+				formControlName="date" 
+				[matDatepicker]="datePicker"
+				matInput 
+				readonly 
+				(click)="datePicker.open()">
+  		<mat-datepicker-toggle 
+  			matSuffix 
+  			[for]="datePicker">
+  		</mat-datepicker-toggle>
+  		<mat-datepicker 
+  			#datePicker
+  			[touchUi]="mediaService.isSmallScreen() | async">
+  		</mat-datepicker>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'date' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Horario</mat-label>
+			<mat-select 
+				formControlName="time" 
+				[compareWith]="compareFn"
+				[disabled]="!slots"
+				(selectionChange)="onSelect($event.value)">
+				<mat-option 
+					*ngFor="let slot of slots" 
+					[value]="slot">
+					{{ slot.format('h:mm A') }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Nombre</mat-label>
+			<input 
+				type="text" 
+				formControlName="name" 
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'name' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>E-mail</mat-label>
+			<input 
+				type="text" 
+				formControlName="email" 
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'email' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field appearance="fill" required>
+			<mat-label>Teléfono</mat-label>
+			<input 
+				type="text" 
+				formControlName="phone" 
+				matInput>
+			<mat-error>
+				<ng-container 
+					*ngTemplateOutlet="errorsTemplate; 
+					context: { $implicit: 'phone' }">
+				</ng-container>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button 
+		mat-button 
+		color="primary" 
+		mat-dialog-close>
+		Cancelar
+	</button>
+	<button 
+		mat-raised-button 
+		color="accent" 
+		[disabled]="form.invalid"
+		appConfirm
+		(confirm)="onSubmit(formData)">
+		Aceptar
+	</button>
+</mat-dialog-actions>
+
+<ng-template #errorsTemplate let-controlName>
+	<ng-container *ngFor="let error of form.controls[controlName].errors | keyvalue">
+		<ng-container 
+			*ngTemplateOutlet="errorTemplate; 
+			context: { $implicit: error.key }">
+		</ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #errorTemplate let-error>
+  <ng-container [ngSwitch]="error">
+    <ng-container *ngSwitchCase="'required'">
+      Este campo es obligatorio
+    </ng-container>
+    <ng-container *ngSwitchCase="'maxlength'">
+      La información ingresada es demasiado extensa
+    </ng-container>
+    <ng-container *ngSwitchCase="'email'">
+      El email ingresado no es valido
+    </ng-container>
+  </ng-container>
+</ng-template>

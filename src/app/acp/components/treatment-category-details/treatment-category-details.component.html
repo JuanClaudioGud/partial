@@ -1,0 +1,11 @@
+<mat-list mat-dialog-content>
+	<h3>{{ category.name }}</h3>
+	<mat-list-item>
+		<div mat-line><b>Descripción</b></div>
+		<div mat-line>{{ category.description }}</div>
+	</mat-list-item>
+	<mat-list-item>
+		<div mat-line><b>Estado</b></div>
+		<div mat-line>{{ category.status ? 'Activo' : 'Inactivo' }}</div>
+	</mat-list-item>
+</mat-list>

@@ -1,0 +1,13 @@
+@import 'components/table';
+
+mat-select {
+	width: auto;
+	::ng-deep .mat-select-trigger {
+		display: flex;
+		flex-direction: row-reverse;
+		align-items: center;
+	}
+	::ng-deep .mat-select-value {
+		max-width: initial;
+	}
+}

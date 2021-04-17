@@ -1,0 +1,57 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+:host {
+	display: block;
+	height: 100vh;
+	background-color: $color-primary;
+}
+
+section {
+	padding: 16px 0px;
+	@include gt-sm {
+		padding: 112px 0px;
+	}
+}
+
+form {
+
+	background-color: #fff;
+	border-radius: 0 0 4px 4px;
+	padding: 16px;
+
+	@include gt-sm {
+		padding: 24px;
+		max-width: 25vw;
+	}
+
+	header {
+
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+		text-align: center;
+		background-color: rgba(0, 0, 0, 0.4);
+    background-image: url(/assets/images/login-form-header.png);
+    background-size: cover;
+    background-blend-mode: darken;
+    margin: -16px -16px 16px;
+
+    @include gt-sm {
+    	margin: -24px -24px 24px;
+    }
+
+    .logo {
+    	filter: invert(100%);
+    	vertical-align: middle;
+			border-style: none;
+  		padding: 24px 0px;
+  		@include gt-sm {
+				padding: 48px 0px;
+			}
+    }
+
+	}
+
+}
